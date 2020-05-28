@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Rezervacije</title>
+</head>
+<body>
+<div align="center">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Apartmani GRAND</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Naslovna</a></li>
+                <li><a href="/list">Apartmani</a></li>
+                <li><a href="/new">Dodaj Apartman</a></li>
+                <li class="active"><a href="/rezervacije">Rezervacije</a></li>
+                <li><a href="/newrezervacija1">Dodaj Rezervaciju</a></li>
+                <li><a href="/admincenter">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Lista rezervacija</h1>
+    <div class="container">
+        <h3>Testiranje softvera</h3>
+        <p>Ovo je Demo aplikacija za potrebe demonstracije tehnika testiranje softvera.</p>
+    </div>
+    <br>
+    <a href="/newrezervacija1">
+        <button type="button" class="btn btn-primary">Prijavi rezervaciju</button>
+    </a>
+
+    <div class="container">
+        <br/>
+        <p>Unesite neki od podataka u polje za pretragu</p>
+         <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <div class="card">
+            <div class="card-block">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Apartman Id</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>BRLK</th>
+                        <th>Email</th>
+                        <th>Datum Od</th>
+                        <th>Datum Do</th>
+                    </tr>
+                    </thead>
+                    <tbody id="myTable">
+                    <tr th:each="rezervacija : ${data}">
+                        <td th:text="${rezervacija.id}">Id...</td>
+                        <td th:text="${rezervacija.apartmanId}">ApartmanId...</td>
+                        <td th:text="${rezervacija.ime}">Ime...</td>
+                        <td th:text="${rezervacija.prezime}">Prezime...</td>
+                        <td th:text="${rezervacija.brLk}">Brlk...</td>
+                        <td th:text="${rezervacija.email}">Email...</td>
+                        <td th:text="${#temporals.format(rezervacija.dateFrom, 'dd/MM/yyyy')}">Datum od...</td>
+                        <td th:text="${#temporals.format(rezervacija.dateTo, 'dd/MM/yyyy')}">Datum do...</td>
+                        <td>
+                            <a th:href="@{'/edit-status/' + ${rezervacija.id}}">
+                                <button type="button" class="btn btn-primary">Pasiviziraj</button>
+                            </a> &nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br/>
+
+</div>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+</body>
+</html>

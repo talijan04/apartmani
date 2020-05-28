@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <title>Greeting</title>
+</head>
+<body>
+<div align="center">
+<h3>Ovo je Greeting stranica!</h3>
+    <div class="container">
+        <div class="card">
+            <div class="card-block">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Apartman Id</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>BRLK</th>
+                        <th>Email</th>
+                        <th>Datum Od</th>
+                        <th>Datum Do</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rezervacija : ${data}">
+                        <td th:text="${rezervacija.id}">Id...</td>
+                        <td th:text="${rezervacija.apartmanId}">ApartmanId...</td>
+                        <td th:text="${rezervacija.ime}">Ime...</td>
+                        <td th:text="${rezervacija.prezime}">Prezime...</td>
+                        <td th:text="${rezervacija.brLk}">Brlk...</td>
+                        <td th:text="${rezervacija.email}">Email...</td>
+                        <td th:text="${rezervacija.dateFrom}">Datum od...</td>
+                           <td th:text="${rezervacija.dateTo}">Datum do...</td>
+                        <!--td th:text="${#dates.format(new java.util.Date(rezervacija.dateTo), 'dd-MMM-yyyy')}"></td-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

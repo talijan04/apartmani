@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script-->
+    <!--script type="text/javascript" src="js/jquery-3.5.0.js"></script-->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{webjars/font-awesome/5.11.2/css/all.css} "/-->
+    <title>Pregled sa apartmanima</title>
+</head>
+<body>
+
+<div align="center">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Apartmani GRAND</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Naslovna</a></li>
+                <li class="active"><a href="/list">Apartmani</a></li>
+                <li><a href="/new">Dodaj Apartman</a></li>
+                <li><a href="/rezervacije">Rezervacije</a></li>
+                <li><a href="/newrezervacija1">Dodaj Rezervaciju</a></li>
+                <li><a href="/admincenter">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 id="test">Lista apartmana</h1>
+
+    <div class="container">
+        <h3>Testiranje softvera</h3>
+        <p>Ovo je Demo aplikacija za potrebe demonstracije tehnika testiranje softvera.</p>
+    </div>
+    <a href="/new">
+        <button type="button" class="btn btn-primary">Dodaj Novi Apartman</button>
+    </a>
+    <br/><br/>
+    <div class="container">
+        <div class="card">
+            <div class="card-block">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Naziv</th>
+                        <th>Cena</th>
+                        <th>Akcija</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="apartman : ${listApartmani}">
+                        <td th:text="${apartman.id}">Id</td>
+                        <td th:text="${apartman.naziv}">Naziv</td>
+                        <td th:text="${apartman.cena}">Cena</td>
+                        <td>
+                            <a th:href="@{'/edit/' + ${apartman.id}}">
+                                <button type="button" class="btn btn-success">Menjaj</button>
+                            </a> &nbsp;&nbsp;&nbsp;
+                            <a th:href="@{'/delete/' + ${apartman.id}}">
+                                <button type="button" class="btn btn-danger">Briši</button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<!--ul class="nav nav-pills">
+    <li class="nav-item" th:each="i : ${#numbers.sequence(1,5)}">
+        <a th:href="@{/(page=${i})}" th:text="${i}" class="nav-link"></a>
+    </li>
+</ul-->
+<div class="container text-center">
+    <ul class="pagination align-content-center">
+        <li th:each="i : ${#numbers.sequence(1,5)}">
+            <a th:href="@{/list(page=${i})}" th:text="${i}" class="nav-link"></a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

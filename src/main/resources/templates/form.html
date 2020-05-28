@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/newrezervacija}" th:object="${rezervacija}" method="post">
+    <table>
+        <tr>
+            <td>Apartman Id:</td>
+            <td><input type="text" th:field="*{apartmanId}" /></td>
+            <td th:if="${#fields.hasErrors('apartmanId')}" th:errors="*{apartmanId}">apartmanId Error</td>
+        </tr>
+        <tr>
+            <td>Ime:</td>
+            <td><input type="text" th:field="*{ime}"/></td>
+            <td th:if="${#fields.hasErrors('ime')}" th:errors="*{ime}">Ime Error</td>
+        </tr>
+        <tr>
+            <td>Prezime:</td>
+            <td><input type="text" th:field="*{prezime}"/></td>
+            <td th:if="${#fields.hasErrors('prezime')}" th:errors="*{prezime}">Prezime Error</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

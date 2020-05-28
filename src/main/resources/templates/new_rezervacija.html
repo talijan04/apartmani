@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Rezerviši</title>
+</head>
+<body>
+
+<div align="center">
+
+    <nav class="navbar navbar-inverse">
+
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Apartmani GRAND</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/#apartmani">Apartmani</a></li>
+                    <li><a href="/#about">O nama</a></li>
+                    <li><a href="/#contact">Kontakt</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="btnLogin" href="/list"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <h1 id="test">Dodajte novu rezervaciju</h1>
+
+    <div class="container">
+        <h3>Testiranje softvera</h3>
+        <p>Ovo je Demo aplikacija za potrebe demonstracije tehnika testiranje softvera.</p>
+    </div>
+    <br/>
+    <form action="#" th:action="@{/saverezervacija}" th:object="${rezervacija}"
+          method="post">
+
+        <table border="0" cellpadding="20">
+            <tr>
+                <td colspan="3" align="center" th:if="${#fields.hasErrors()}">
+                    <div class="alert alert-danger">
+                        Popunite ispravno sva polja.
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center" th:if="${broj != 0}">
+                    <div class="alert alert-danger">
+                        Ovaj termin je popunjen.
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Apartman:</td>
+                <td>
+                    <select id="apartmanId" class="form-control" th:field="*{apartmanId}">
+                        <option value=""> --</option>
+                        <option th:each="apartman : ${listApartmani}"
+                                th:value="${apartman.id}"
+                                th:utext="${apartman.naziv}"/>
+                    </select>
+                </td>
+                <td class="text-danger" th:if="${#fields.hasErrors('apartmanId')}" th:errors="*{apartmanId}">Ime Error
+                </td>
+            </tr>
+            <tr>
+                <td>Ime:</td>
+                <td><input id="ime" type="text" class="form-control form-control-sm" placeholder="Ime"
+                           th:field="*{ime}"/></td>
+                <td class="text-danger" th:if="${#fields.hasErrors('ime')}" th:errors="*{ime}">Ime Error</td>
+            </tr>
+            <tr>
+                <td>Prezime:</td>
+                <td><input id="prezime" type="text" class="form-control form-control-sm" placeholder="Prezime"
+                           th:field="*{prezime}"/></td>
+                <td class="text-danger" th:if="${#fields.hasErrors('prezime')}" th:errors="*{prezime}">Prezime Error
+                </td>
+            </tr>
+            <tr>
+                <td>Broj licne karte:</td>
+                <td><input id="brLk" type="text" class="form-control form-control-sm" placeholder="Broj licne karte"
+                           th:field="*{brLk}"/></td>
+                <td class="text-danger" th:if="${#fields.hasErrors('brLk')}" th:errors="*{brLk}">brLk Error</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input id="email" type="text" class="form-control form-control-sm" placeholder="Email"
+                           th:field="*{email}"/></td>
+                <td class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</td>
+            </tr>
+            <tr>
+                <td>Datum od:</td>
+                <td><input id="dateFrom" type="date" class="form-control form-control-sm" th:field="*{dateFrom}"/></td>
+                <td class="text-danger" th:if="${#fields.hasErrors('dateFrom')}" th:errors="*{dateFrom}">dateFrom
+                    Error
+                </td>
+            </tr>
+            <tr>
+                <td>Datum do:</td>
+                <td><input id="dateTo" type="date" class="form-control form-control-sm" th:field="*{dateTo}"/></td>
+                <td class="text-danger" th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}">Ime Error</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="3" align="center">
+                    <br>
+                    <button type="submit" class="btn btn-success">Rezerviši</button>
+                    <!--a href="/sendemail" class="btn btn-info" role="button">Send Email</a-->
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
